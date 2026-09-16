@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RP Code</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/neo.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Background glow blobs -->
+  <div class="backdrop" aria-hidden="true">
+    <span class="blob blob--violet"></span>
+    <span class="blob blob--teal"></span>
+    <span class="blob blob--amber"></span>
+  </div>
+
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="topbar glass">
+
+    <div class="brand">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span>RP Code</span>
+    </div>
+
+    <div class="btn-container">
+
+      <button type="button" id="run-button" class="btn btn--primary">
+        <i class="fa-solid fa-play"></i>
+        <span>Run</span>
+      </button>
+
+      <button type="button" id="save-button" class="btn">
+        <i class="fa-solid fa-bookmark"></i>
+        <span>Save</span>
+      </button>
+
+      <button type="button" id="load-button" class="btn">
+        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        <span>Fetch</span>
+      </button>
+
+      <button type="button" id="delete-button" class="btn btn--danger">
+        <i class="fa-solid fa-trash"></i>
+        <span>Clear</span>
+      </button>
+
+      <button type="button" id="download-button" class="btn">
+        <i class="fa-solid fa-download"></i>
+        <span>Download</span>
+      </button>
+
+      <div class="select-wrap">
+        <i class="fa-solid fa-display"></i>
+        <select id="preview-size" aria-label="Preview size">
+          <option value="desktop">Desktop</option>
+          <option value="tablet">Tablet</option>
+          <option value="mobile">Mobile</option>
+        </select>
+      </div>
+
+      <button type="button"
+              id="theme-toggle-button"
+              class="theme-toggle"
+              aria-label="Switch theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ===================== WORKSPACE ===================== -->
+  <main class="workspace">
+
+    <!-- LEFT: HTML / CSS / JS -->
+    <section id="editor-container">
+
+      <article class="panel glass" id="html-editor">
+        <div class="panel__head">
+          <i class="fa-brands fa-html5"></i>
+          <h2>HTML</h2>
+        </div>
+        <div id="html-container" class="editor"></div>
+      </article>
+
+      <article class="panel glass" id="css-editor">
+        <div class="panel__head">
+          <i class="fa-brands fa-css3-alt"></i>
+          <h2>CSS</h2>
+        </div>
+        <div id="css-container" class="editor"></div>
+      </article>
+
+      <article class="panel glass" id="js-editor">
+        <div class="panel__head">
+          <i class="fa-brands fa-square-js"></i>
+          <h2>JavaScript</h2>
+        </div>
+        <div id="js-container" class="editor"></div>
+      </article>
+
+    </section>
+
+
+    <!-- RIGHT: OUTPUT -->
+    <section class="panel glass output-container">
+      <div class="panel__head">
+        <i class="fa-solid fa-laptop-code"></i>
+        <h2>Output</h2>
+        <span class="status" id="status-pill">Live</span>
+      </div>
+      <div class="output-stage">
+        <iframe id="output" title="Code output"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Toast -->
+  <div class="toast glass" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/display/placeholder.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/html-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/css-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/javascript-hint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closetag.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closebrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/matchbrackets.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
