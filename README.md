@@ -105,7 +105,7 @@ The live preview combines the HTML, CSS and JavaScript editor contents and rende
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/rp-code.git
+git clone https://github.com/poornachandra3217-glitch/RP-Code-Editer.git
 ```
 
 ### 2. Open the project
